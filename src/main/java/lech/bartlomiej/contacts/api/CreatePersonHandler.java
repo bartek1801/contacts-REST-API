@@ -6,6 +6,7 @@ import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Component
 public class CreatePersonHandler {
@@ -20,6 +21,11 @@ public class CreatePersonHandler {
     @Transactional
     public void handle(CreatePersonCommand cmd){
         Person person = new Person(cmd.getFirstName(), cmd.getLastName(), cmd.getGender(), cmd.getBirthDate(), cmd.getPesel());
-        personRepository.save(person); //TODO dodać sprawdzenie peselu aby nie można było wprowdzic osoby z tym samym peselem
+//        if (!isPeselExist(cmd))
+            personRepository.save(person); //TODO a może jeśli jest ten sam pesel to update???
     }
+
+//    private boolean isPeselExist(CreatePersonCommand cmd) {
+//        return personRepository.findByPesel(cmd.getPesel()).isPresent();
+//    }
 }

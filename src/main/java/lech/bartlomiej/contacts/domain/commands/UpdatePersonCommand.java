@@ -4,8 +4,7 @@ import lech.bartlomiej.contacts.domain.Gender;
 
 import java.time.LocalDate;
 
-public class CreatePersonCommand implements ValidCommand {
-
+public class UpdatePersonCommand implements ValidCommand {
 
     private String firstName;
     private String lastName;
@@ -55,17 +54,6 @@ public class CreatePersonCommand implements ValidCommand {
 
     @Override
     public void validate(ValidationErrors errors) {
-        if (isEmpty(firstName))
-            errors.add("firstName", "can't be blank");
-        if (isEmpty(lastName))
-            errors.add("lastName", "can't be blank");
-        if (gender == null)
-            errors.add("gender", "can't be blank");
-        if (birthDate == null)
-            errors.add("birthDate", "can't be blank");
-        if (pesel == null)
-            errors.add("pesel", "can't be blank");
-        if (pesel != null && pesel.toString().length() != 11)
-            errors.add("pesel", "pesel should consist of 11 digits");
+
     }
 }

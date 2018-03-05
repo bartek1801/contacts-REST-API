@@ -73,6 +73,18 @@ public class AppTest {
     }
 
     @Test
+    public void shouldNotAddNewPersonWhenPeselHasWrongLength() throws Exception {
+        Person person = new Person("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 900101L);
+
+        mockMvc.perform(put("/person").
+                contentType(MediaType.APPLICATION_JSON).
+                content(objectMapper.writeValueAsString(person))
+        ).andExpect(status().isUnprocessableEntity()).
+                andExpect(jsonPath("$.errors.pesel").value("pesel should consist of 11 digits"))
+        ;
+    }
+
+    @Test
     public void shouldDeletePerson() throws Exception {
         savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
 
@@ -81,7 +93,33 @@ public class AppTest {
         mockMvc.perform(get("/person/1").
                 param("firstName", "Jan").
                 param("lastName", "Nowak").
-                param("gen`der", "M").
+                param("gender", "M").
+                param("birthDate", "1990-01-01").
+                param("pesel", "90010122222").
+                param("active", "false").
+                contentType(MediaType.APPLICATION_JSON)).
+                andExpect(status().isOk())
+        ;
+    }
+
+   // @Test
+    public void shouldUpdatePersonDetails() throws Exception {
+        savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
+
+        mockMvc.perform(put("/person/1").
+                param("firstName", "Janek").
+                param("lastName", "Nowak").
+                param("gender", "M").
+                param("birthDate", "1990-01-01").
+                param("pesel", "90010122222").
+                contentType(MediaType.APPLICATION_JSON)).
+                andExpect(status().isOk())
+        ;
+
+        mockMvc.perform(get("/person/1").
+                param("firstName", "Janek").
+                param("lastName", "Nowak").
+                param("gender", "M").
                 param("birthDate", "1990-01-01").
                 param("pesel", "90010122222").
                 param("active", "false").
