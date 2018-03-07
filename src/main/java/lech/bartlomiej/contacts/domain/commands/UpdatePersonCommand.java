@@ -54,6 +54,7 @@ public class UpdatePersonCommand implements ValidCommand {
 
     @Override
     public void validate(ValidationErrors errors) {
-
+        if (pesel != null && pesel.toString().length() != 11)
+            errors.add("pesel", "pesel should consist of 11 digits");
     }
 }

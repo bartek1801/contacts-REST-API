@@ -14,6 +14,6 @@ public class DeletePersonCommand implements ValidCommand {
 
     @Override
     public void validate(ValidationErrors errors) {
-        //TODO
+
     }
 }
