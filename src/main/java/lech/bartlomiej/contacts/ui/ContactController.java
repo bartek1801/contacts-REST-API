@@ -3,6 +3,7 @@ package lech.bartlomiej.contacts.ui;
 import lech.bartlomiej.contacts.api.*;
 import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.commands.AddContactCommand;
+import lech.bartlomiej.contacts.domain.commands.DeleteContactDetailsCommand;
 import lech.bartlomiej.contacts.domain.commands.DeleteContactForPersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,14 @@ public class ContactController {
     private AddContactHandler addContactHandler;
     private UpdateContactForPersonHandler updateContactForPersonHandler;
     private DeleteContactForPersonHandler deleteContactForPersonHandler;
+    private DeleteContactDetailsHandler deleteContactDetailsHandler;
     private PersonFinder personFinder;
 
-    public ContactController(AddContactHandler addContactHandler, UpdateContactForPersonHandler updateContactForPersonHandler, DeleteContactForPersonHandler deleteContactForPersonHandler, PersonFinder personFinder) {
+    public ContactController(AddContactHandler addContactHandler, UpdateContactForPersonHandler updateContactForPersonHandler, DeleteContactForPersonHandler deleteContactForPersonHandler, DeleteContactDetailsHandler deleteContactDetailsHandler, PersonFinder personFinder) {
         this.addContactHandler = addContactHandler;
         this.updateContactForPersonHandler = updateContactForPersonHandler;
         this.deleteContactForPersonHandler = deleteContactForPersonHandler;
+        this.deleteContactDetailsHandler = deleteContactDetailsHandler;
         this.personFinder = personFinder;
     }
 
@@ -49,6 +52,10 @@ public class ContactController {
         deleteContactForPersonHandler.handle(command);
     }
 
-
+    @PutMapping("delete/{personId}/details")
+    public void deleteContactDetails(@RequestBody DeleteContactDetailsCommand command, @PathVariable Long personId){
+        command.setPersonId(personId);
+        deleteContactDetailsHandler.handle(command);
+    }
 
 }

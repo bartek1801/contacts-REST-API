@@ -1,7 +1,7 @@
 # contacts-REST-API
 
 ENDPOINTS
-1) Add a new person: PUT/person
+1) Add a new person: POST/person
 Request body:
 {
     "firstName": "Janek",
@@ -15,7 +15,7 @@ Request body:
 
 3) Delete person: DELETE/person/{personId}
 
-4) Update person details: DELETE/person/update
+4) Update person details: PUT/person/{personId}
 Request body:
 {
     "firstName": "Jan",
@@ -25,7 +25,7 @@ Request body:
     "pesel" : 90010122222
 }
 
-5) Add contact to person: PUT/contact/{personId}
+5) Add contact to person: POST/contact/{personId}
 RequestBody:
 {
 	"phoneNumbers": [
@@ -51,3 +51,63 @@ RequestBody:
 }
 
 6) Get person contact: GET/person/{personId}
+
+7) Update contact for person PUT/update/{personId}
+Request Body:
+{ 
+	"phoneNumbers": [ 
+		"123 456 789", 
+		"000 000 000" 
+		], 
+	"emailAddresses": [ 
+		"sample@mail.com", 
+		"thirdMail@mail.com" ], 
+	"addresses":[ 
+		{ 
+			"street": "Warszawska 101", 
+			"postalCode": "20-500", 
+			"city": "Lublin" 
+			
+		},
+		{ 
+			"street": "Lubelska 101", 
+			"postalCode": "01-500", 
+			"city": "Warszawa" 
+			
+		} 
+		] 
+	
+}
+
+8) Delete contact for person DELETE/delete/{personId}
+
+9) Delete contact details PUT/delete/{personId}/details
+Request body:
+{ 
+	"phoneNumbers": [ 
+		"123 456 789", 
+		"000 000 000" 
+		], 
+	"emailAddresses": [ 
+		"sample@mail.com", 
+		"thirdMail@mail.com" ], 
+	"addresses":[ 
+		{ 
+			"street": "Warszawska 101", 
+			"postalCode": "20-500", 
+			"city": "Lublin" 
+			
+		},
+		{ 
+			"street": "Lubelska 101", 
+			"postalCode": "01-500", 
+			"city": "Warszawa" 
+			
+		} 
+		] 
+	
+}
+
+
+
+

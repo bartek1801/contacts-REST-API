@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class AddContactCommand implements ValidCommand {
 
-    private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+    public static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
     private Long personId;
     private Set<String> phoneNumbers;
     private Set<String> emailAddresses;

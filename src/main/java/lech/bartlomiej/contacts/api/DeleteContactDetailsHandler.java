@@ -2,28 +2,27 @@ package lech.bartlomiej.contacts.api;
 
 import lech.bartlomiej.contacts.domain.Contact;
 import lech.bartlomiej.contacts.domain.Person;
-import lech.bartlomiej.contacts.domain.commands.AddContactCommand;
+import lech.bartlomiej.contacts.domain.commands.DeleteContactDetailsCommand;
 import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
 @Component
-public class AddContactHandler {
+public class DeleteContactDetailsHandler {
 
     private PersonRepository personRepository;
 
-
-    public AddContactHandler(PersonRepository personRepository) {
+    public DeleteContactDetailsHandler(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
+
     @Transactional
-    public void handle(AddContactCommand command){
+    public void handle(DeleteContactDetailsCommand command) {
         Person person = personRepository.getById(command.getPersonId());
-        if (person.getContact() == null) {
-            person.setContact(new Contact(command));
-            personRepository.save(person);
-        }
+        Contact contact = person.getContact();
+        contact.deleteDetailsIfExixt(command);
+        personRepository.save(person);
     }
 }

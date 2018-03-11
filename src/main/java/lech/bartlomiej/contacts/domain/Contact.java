@@ -1,6 +1,7 @@
 package lech.bartlomiej.contacts.domain;
 
 import lech.bartlomiej.contacts.domain.commands.AddContactCommand;
+import lech.bartlomiej.contacts.domain.commands.DeleteContactDetailsCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 
 import javax.persistence.*;
@@ -102,5 +103,14 @@ public class Contact {
 
     public void delete() {
         this.active = false;
+    }
+
+    public void deleteDetailsIfExixt(DeleteContactDetailsCommand command) {
+        if (!command.getPhoneNumbers().isEmpty() && this.phoneNumbers.containsAll(command.getPhoneNumbers()))
+            this.phoneNumbers.removeAll(command.getPhoneNumbers());
+        if (!command.getEmailAddresses().isEmpty() && this.emailAddresses.containsAll(command.getEmailAddresses()))
+            this.emailAddresses.removeAll(command.getEmailAddresses());
+        if (!command.getAddresses().isEmpty() && this.addresses.containsAll(command.getAddresses()))
+            this.addresses.removeAll(command.getAddresses());
     }
 }
