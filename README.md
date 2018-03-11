@@ -3,12 +3,12 @@
 ENDPOINTS
 1) Add a new person: POST/person
 Request body:
-{
-    "firstName": "Janek",
-    "lastName": "Nowak",
-    "gender": "M",
-    "birthDate": "1990-01-01",
-    "pesel" : 90010122221
+{ 
+	"firstName": "Janek",
+	"lastName": "Nowakowski", 
+	"gender": "M", 
+	"birthDate": "1990-01-01",
+	"pesel" : 90010122220 
 }
 
 2) Get person: GET/person/{personId}
@@ -17,12 +17,12 @@ Request body:
 
 4) Update person details: PUT/person/{personId}
 Request body:
-{
-    "firstName": "Jan",
-    "lastName": "Nowak",
-    "gender": "M",
-    "birthDate": "1990-01-01",
-    "pesel" : 90010122222
+{ 
+	"firstName": "Janek",
+	"lastName": "Nowak", 
+	"gender": "M", 
+	"birthDate": "1990-01-01",
+	"pesel" : 90010122220 
 }
 
 5) Add contact to person: POST/contact/{personId}
