@@ -15,9 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,7 +59,7 @@ public class AppTest {
     public void shouldNotAddNewPerson() throws Exception {
         Person person = new Person("", "", Gender.M, null, null);
 
-        mockMvc.perform(put("/person").
+        mockMvc.perform(post("/person").
                 contentType(MediaType.APPLICATION_JSON).
                 content(objectMapper.writeValueAsString(person))
         ).andExpect(status().isUnprocessableEntity()).
@@ -76,7 +74,7 @@ public class AppTest {
     public void shouldNotAddNewPersonWhenPeselHasWrongLength() throws Exception {
         Person person = new Person("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 900101L);
 
-        mockMvc.perform(put("/person").
+        mockMvc.perform(post("/person").
                 contentType(MediaType.APPLICATION_JSON).
                 content(objectMapper.writeValueAsString(person))
         ).andExpect(status().isUnprocessableEntity()).
@@ -132,7 +130,7 @@ public class AppTest {
     private void savePerson(String firstName, String lastName, Gender gender, LocalDate birthDate, Long pesel) throws Exception {
         Person person = new Person(firstName, lastName, gender, birthDate, pesel);
         mockMvc.perform(
-                put("/person").
+                post("/person").
                         contentType(MediaType.APPLICATION_JSON).
                         content(objectMapper.writeValueAsString(person))
         ).andExpect(status().isOk());

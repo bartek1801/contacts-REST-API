@@ -23,7 +23,7 @@ public class ContactController {
         this.personFinder = personFinder;
     }
 
-    @PutMapping("/{personId}")
+    @PostMapping("/{personId}")
     public void addContactToPerson(@PathVariable Long personId, @RequestBody AddContactCommand command){
         command.setPersonId(personId);
         addContactHandler.handle(command);
@@ -48,5 +48,7 @@ public class ContactController {
         command.setPersonId(personId);
         deleteContactForPersonHandler.handle(command);
     }
+
+
 
 }

@@ -26,7 +26,7 @@ public class PersonController {
     }
 
 
-    @PutMapping
+    @PostMapping
     public void savePerson(@RequestBody CreatePersonCommand command){
         createPersonHandler.handle(command);
     }
