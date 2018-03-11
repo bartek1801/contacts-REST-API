@@ -4,7 +4,7 @@ package lech.bartlomiej.contacts.ui;
 import lech.bartlomiej.contacts.api.*;
 import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.DeletePersonCommand;
-import lech.bartlomiej.contacts.domain.commands.UpdatePersonCommand;
+import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,15 +13,15 @@ public class PersonController {
 
     private CreatePersonHandler createPersonHandler;
     private DeletePersonHandler deletePersonHandler;
-    private UpdatePersonHandler updatePersonHandler;
+    private UpdatePersonDetailsHandler updatePersonDetailsHandler;
     private PersonFinder personFinder;
 
 
     public PersonController(CreatePersonHandler createPersonHandler, DeletePersonHandler deletePersonHandler,
-                            UpdatePersonHandler updatePersonHandler, PersonFinder personFinder) {
+                            UpdatePersonDetailsHandler updatePersonDetailsHandler, PersonFinder personFinder) {
         this.createPersonHandler = createPersonHandler;
         this.deletePersonHandler = deletePersonHandler;
-        this.updatePersonHandler = updatePersonHandler;
+        this.updatePersonDetailsHandler = updatePersonDetailsHandler;
         this.personFinder = personFinder;
     }
 
@@ -44,8 +44,8 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public void updatePerson(@RequestBody UpdatePersonCommand command, @PathVariable Long id){
-        updatePersonHandler.handle(command);
+    public void updatePersonDetails(@RequestBody UpdatePersonDetailsCommand command, @PathVariable Long id){
+        updatePersonDetailsHandler.handle(command);
     }
 
 }

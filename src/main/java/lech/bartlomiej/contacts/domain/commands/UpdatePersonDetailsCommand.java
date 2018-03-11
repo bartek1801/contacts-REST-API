@@ -4,7 +4,7 @@ import lech.bartlomiej.contacts.domain.Gender;
 
 import java.time.LocalDate;
 
-public class UpdatePersonCommand implements ValidCommand {
+public class UpdatePersonDetailsCommand implements ValidCommand {
 
     private String firstName;
     private String lastName;

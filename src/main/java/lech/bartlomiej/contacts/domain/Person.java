@@ -1,6 +1,7 @@
 package lech.bartlomiej.contacts.domain;
 
-import lech.bartlomiej.contacts.domain.commands.UpdatePersonCommand;
+import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
+import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -108,10 +109,13 @@ public class Person {
         this.contact = contact;
     }
 
-    public void updateDetails(UpdatePersonCommand command) {
+    public void updateDetails(UpdatePersonDetailsCommand command) {
         if (!(firstName.equals(command.getFirstName())) && command.getFirstName() != null)
             this.firstName = command.getFirstName();
     }
 
 
+    public void addDetailsToContact(UpdateContactForPersonCommand command) {
+        this.contact.addDetails(command);
+    }
 }

@@ -1,8 +1,10 @@
 package lech.bartlomiej.contacts.domain;
 
 import lech.bartlomiej.contacts.domain.commands.AddContactCommand;
+import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -26,6 +28,8 @@ public class Contact {
     @OneToOne(mappedBy = "contact")
     private Person person;
 
+    private boolean active;
+
     public Contact() {
     }
 
@@ -39,6 +43,7 @@ public class Contact {
         this.phoneNumbers = command.getPhoneNumbers();
         this.emailAddresses = command.getEmailAddresses();
         this.addresses = command.getAddresses();
+        this.active = true;
     }
 
     public Long getId() {
@@ -79,5 +84,23 @@ public class Contact {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void addDetails(UpdateContactForPersonCommand command) {
+        this.phoneNumbers.addAll(command.getPhoneNumbers());
+        this.emailAddresses.addAll(command.getEmailAddresses());
+        this.addresses.addAll(command.getAddresses());
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }
