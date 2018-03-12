@@ -43,7 +43,7 @@ public class AppTest {
     public void shouldAddNewPerson() throws Exception {
         savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
 
-        mockMvc.perform(get("/person/1").
+        mockMvc.perform(get("/person/{id}", 1).
                 param("firstName", "Jan").
                 param("lastName", "Nowak").
                 param("gen`der", "M").
