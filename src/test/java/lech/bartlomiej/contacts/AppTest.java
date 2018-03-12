@@ -88,34 +88,8 @@ public class AppTest {
 
         mockMvc.perform(delete("/person/1")).andExpect(status().isOk());
 
-        mockMvc.perform(get("/person/1").
+        mockMvc.perform(get("/person/{id}", 1).
                 param("firstName", "Jan").
-                param("lastName", "Nowak").
-                param("gender", "M").
-                param("birthDate", "1990-01-01").
-                param("pesel", "90010122222").
-                param("active", "false").
-                contentType(MediaType.APPLICATION_JSON)).
-                andExpect(status().isOk())
-        ;
-    }
-
-   // @Test
-    public void shouldUpdatePersonDetails() throws Exception {
-        savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
-
-        mockMvc.perform(put("/person/1").
-                param("firstName", "Janek").
-                param("lastName", "Nowak").
-                param("gender", "M").
-                param("birthDate", "1990-01-01").
-                param("pesel", "90010122222").
-                contentType(MediaType.APPLICATION_JSON)).
-                andExpect(status().isOk())
-        ;
-
-        mockMvc.perform(get("/person/1").
-                param("firstName", "Janek").
                 param("lastName", "Nowak").
                 param("gender", "M").
                 param("birthDate", "1990-01-01").
