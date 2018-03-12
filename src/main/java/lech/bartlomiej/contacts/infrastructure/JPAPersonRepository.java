@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.Optional;
+import java.util.List;
 
 @Component
 public class JPAPersonRepository implements PersonRepository {
@@ -28,9 +28,9 @@ public class JPAPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Person findByPesel(Long pesel) {
+    public List<Person> findByPesel(Long pesel) {
         Query query = entityManager.createQuery("SELECT p FROM Person p WHere p.pesel = :pesel");
         query.setParameter("pesel", pesel);
-        return (Person) query.getSingleResult();
+        return  (List<Person>) query.getResultList();
     }
 }

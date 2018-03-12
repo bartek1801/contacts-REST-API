@@ -2,7 +2,7 @@ package lech.bartlomiej.contacts.domain.repositories;
 
 import lech.bartlomiej.contacts.domain.Person;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface PersonRepository {
 
@@ -10,5 +10,5 @@ public interface PersonRepository {
 
     Person getById(Long id);
 
-    Person findByPesel(Long pesel);
+    List<Person> findByPesel(Long pesel);
 }

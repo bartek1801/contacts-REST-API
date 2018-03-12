@@ -6,6 +6,7 @@ import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -20,7 +21,7 @@ public class UpdatePersonDetailsHandler {
 
     @Transactional
     public void handle(UpdatePersonDetailsCommand command){
-        Optional<Person> person = Optional.of(personRepository.findByPesel(command.getPesel()));
+        Optional<Person> person = personRepository.findByPesel(command.getPesel()).stream().findFirst();
         if (person.isPresent()){
             person.get().updateDetails(command);
             personRepository.save(person.get());
