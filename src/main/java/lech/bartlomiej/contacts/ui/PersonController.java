@@ -2,10 +2,14 @@ package lech.bartlomiej.contacts.ui;
 
 
 import lech.bartlomiej.contacts.api.*;
+import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.DeletePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/person")
@@ -46,6 +50,12 @@ public class PersonController {
     @PutMapping("/{id}")
     public void updatePersonDetails(@RequestBody UpdatePersonDetailsCommand command, @PathVariable Long id){
         updatePersonDetailsHandler.handle(command);
+    }
+
+    @GetMapping("/persons")
+    public List<BasicPersonDto> findPersonsByName(String firstName){
+        List<Person> personList = personFinder.findByFirstName(firstName);
+        return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
 }
