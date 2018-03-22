@@ -52,10 +52,17 @@ public class PersonController {
         updatePersonDetailsHandler.handle(command);
     }
 
-    @GetMapping("/persons")
+    @GetMapping("/search")
     public List<BasicPersonDto> findPersonsByName(String firstName){
         List<Person> personList = personFinder.findByFirstName(firstName);
         return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/search/contact")
+    public List<BasicPersonDto> findPersonsWithActiveContact(Boolean active){
+        List<Person> personList = personFinder.findByContactActive(active);
+        return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
+        //TODO stworzyć obiekt SearchQuery z różnymi parametrami
     }
 
 }

@@ -11,4 +11,6 @@ public interface PersonFinder extends JpaRepository<Person, Long> {
 
     List<Person> findByFirstName(String firstName);
 
+
+    List<Person> findByContactActive(Boolean active);
 }
