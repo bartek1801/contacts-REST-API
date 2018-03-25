@@ -1,6 +1,11 @@
 package lech.bartlomiej.contacts.ui;
 
 import lech.bartlomiej.contacts.api.*;
+import lech.bartlomiej.contacts.api.dtos.ContactDto;
+import lech.bartlomiej.contacts.api.handlers.AddContactHandler;
+import lech.bartlomiej.contacts.api.handlers.DeleteContactDetailsHandler;
+import lech.bartlomiej.contacts.api.handlers.DeleteContactForPersonHandler;
+import lech.bartlomiej.contacts.api.handlers.UpdateContactForPersonHandler;
 import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.commands.AddContactCommand;
 import lech.bartlomiej.contacts.domain.commands.DeleteContactDetailsCommand;

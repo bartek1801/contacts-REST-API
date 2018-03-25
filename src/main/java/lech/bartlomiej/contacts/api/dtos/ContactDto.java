@@ -1,4 +1,4 @@
-package lech.bartlomiej.contacts.api;
+package lech.bartlomiej.contacts.api.dtos;
 
 import lech.bartlomiej.contacts.domain.Contact;
 

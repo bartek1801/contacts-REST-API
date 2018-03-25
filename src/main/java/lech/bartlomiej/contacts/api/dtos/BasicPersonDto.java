@@ -1,4 +1,4 @@
-package lech.bartlomiej.contacts.api;
+package lech.bartlomiej.contacts.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lech.bartlomiej.contacts.domain.Gender;

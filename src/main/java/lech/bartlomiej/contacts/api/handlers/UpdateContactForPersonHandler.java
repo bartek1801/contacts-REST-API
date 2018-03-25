@@ -1,4 +1,4 @@
-package lech.bartlomiej.contacts.api;
+package lech.bartlomiej.contacts.api.handlers;
 
 import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
