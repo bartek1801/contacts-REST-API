@@ -1,9 +1,12 @@
 package lech.bartlomiej.contacts.infrastructure;
 
+import lech.bartlomiej.contacts.api.PersonFinder;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+
 @Component
-public class JPAPersonFinder  {
+public class JPAPersonFinder {
 
 //    private EntityManager entityManager;
 //

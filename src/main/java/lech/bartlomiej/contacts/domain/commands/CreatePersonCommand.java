@@ -1,7 +1,5 @@
 package lech.bartlomiej.contacts.domain.commands;
 
-import lech.bartlomiej.contacts.domain.Gender;
-
 import java.time.LocalDate;
 
 public class CreatePersonCommand implements ValidCommand {
@@ -9,7 +7,7 @@ public class CreatePersonCommand implements ValidCommand {
 
     private String firstName;
     private String lastName;
-    private Gender gender;
+    private String gender;
     private LocalDate birthDate;
     private Long pesel;
 
@@ -29,11 +27,11 @@ public class CreatePersonCommand implements ValidCommand {
         this.lastName = lastName;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -61,6 +59,8 @@ public class CreatePersonCommand implements ValidCommand {
             errors.add("lastName", "can't be blank");
         if (gender == null)
             errors.add("gender", "can't be blank");
+        if (gender != null && !gender.equals("M") && !gender.equals("F"))
+            errors.add("gender", "incorrect value, chose 'F' or 'M'");
         if (birthDate == null)
             errors.add("birthDate", "can't be blank");
         if (pesel == null)

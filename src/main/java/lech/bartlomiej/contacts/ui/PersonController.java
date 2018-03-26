@@ -10,6 +10,7 @@ import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.DeletePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
+import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,14 +24,16 @@ public class PersonController {
     private DeletePersonHandler deletePersonHandler;
     private UpdatePersonDetailsHandler updatePersonDetailsHandler;
     private PersonFinder personFinder;
+    private PersonRepository personRepository;
 
 
     public PersonController(CreatePersonHandler createPersonHandler, DeletePersonHandler deletePersonHandler,
-                            UpdatePersonDetailsHandler updatePersonDetailsHandler, PersonFinder personFinder) {
+                            UpdatePersonDetailsHandler updatePersonDetailsHandler, PersonFinder personFinder, PersonRepository personRepository) {
         this.createPersonHandler = createPersonHandler;
         this.deletePersonHandler = deletePersonHandler;
         this.updatePersonDetailsHandler = updatePersonDetailsHandler;
         this.personFinder = personFinder;
+        this.personRepository = personRepository;
     }
 
 
@@ -57,8 +60,8 @@ public class PersonController {
     }
 
     @GetMapping("/search")
-    public List<BasicPersonDto> findPersonsByName(String firstName){
-        List<Person> personList = personFinder.findByFirstName(firstName);
+    public List<BasicPersonDto> findPersonsByNames(String firstName, String lastName){
+        List<Person> personList = personFinder.findByFirstNameOrLastName(firstName, lastName);
         return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
@@ -66,7 +69,11 @@ public class PersonController {
     public List<BasicPersonDto> findPersonsWithActiveContact(Boolean active){
         List<Person> personList = personFinder.findByContactActive(active);
         return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
-        //TODO stworzyć obiekt SearchQuery z różnymi parametrami
+    }
+
+    @PostMapping("/")
+    public List<BasicPersonDto> findPerson(@RequestBody PersonSearchCriteria personSearchCriteria){
+        return personRepository.search(personSearchCriteria).stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
 }

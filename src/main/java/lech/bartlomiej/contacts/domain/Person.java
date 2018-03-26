@@ -32,10 +32,10 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, Gender gender, LocalDate birthDate, Long pesel) {
+    public Person(String firstName, String lastName, String gender, LocalDate birthDate, Long pesel) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
+        this.gender = Gender.valueOf(gender);
         this.birthDate = birthDate;
         this.pesel = pesel;
         this.active = true;
