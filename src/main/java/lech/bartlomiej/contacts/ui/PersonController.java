@@ -11,6 +11,10 @@ import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.DeletePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,5 +79,12 @@ public class PersonController {
     public List<BasicPersonDto> findPerson(@RequestBody PersonSearchCriteria personSearchCriteria){
         return personRepository.search(personSearchCriteria).stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
+
+    @GetMapping("search/all/{pageNo}")
+    public Page<BasicPersonDto> findAllPersons(@PathVariable Integer pageNo){
+        return personRepository.findAll(new PageRequest(pageNo, 2, new Sort("lastName"))).map(BasicPersonDto::new);
+    }
+
+
 
 }
