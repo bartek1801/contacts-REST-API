@@ -73,4 +73,17 @@ public class BasicPersonDto {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "BasicPersonDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                ", pesel=" + pesel +
+                ", active=" + active +
+                '}';
+    }
 }

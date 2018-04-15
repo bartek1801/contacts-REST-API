@@ -1,7 +1,8 @@
 package lech.bartlomiej.contacts.ui;
 
 
-import lech.bartlomiej.contacts.api.*;
+import lech.bartlomiej.contacts.api.PersonFinder;
+import lech.bartlomiej.contacts.api.PersonSearchCriteria;
 import lech.bartlomiej.contacts.api.dtos.BasicPersonDto;
 import lech.bartlomiej.contacts.api.handlers.CreatePersonHandler;
 import lech.bartlomiej.contacts.api.handlers.DeletePersonHandler;
@@ -13,7 +14,6 @@ import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
