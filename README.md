@@ -1,8 +1,10 @@
 # contacts-REST-API
 
-ENDPOINTS
+## ENDPOINTS
 1) Add a new person: POST/person
+
 Request body:
+```
 { 
 	"firstName": "Janek",
 	"lastName": "Nowakowski", 
@@ -10,13 +12,16 @@ Request body:
 	"birthDate": "1990-01-01",
 	"pesel" : 90010122220 
 }
+```
 
 2) Get person: GET/person/{personId}
 
 3) Delete person: DELETE/person/{personId}
 
 4) Update person details: PUT/person/{personId}
+
 Request body:
+```
 { 
 	"firstName": "Janek",
 	"lastName": "Nowak", 
@@ -24,9 +29,12 @@ Request body:
 	"birthDate": "1990-01-01",
 	"pesel" : 90010122220 
 }
+```
 
 5) Add contact to person: POST/contact/{personId}
+
 RequestBody:
+```
 {
 	"phoneNumbers": [
 		"123 456 789",
@@ -49,11 +57,14 @@ RequestBody:
 		}
 		]
 }
+```
 
 6) Get person contact: GET/person/{personId}
 
 7) Update contact for person PUT/update/{personId}
+
 Request Body:
+```
 { 
 	"phoneNumbers": [ 
 		"123 456 789", 
@@ -78,11 +89,14 @@ Request Body:
 		] 
 	
 }
+```
 
 8) Delete contact for person DELETE/delete/{personId}
 
 9) Delete contact details PUT/delete/{personId}/details
+
 Request body:
+```
 { 
 	"phoneNumbers": [ 
 		"123 456 789", 
@@ -107,6 +121,7 @@ Request body:
 		] 
 	
 }
+```
 
 
 
