@@ -1,6 +1,12 @@
 # contacts-REST-API
 
-## ENDPOINTS
+## ENDPOINTS 
+
+The swagger is running under
+<pre>
+http://localhost:8080/swagger-ui.html
+<pre>
+
 1) Add a new person: POST/person
 
 Request body:
