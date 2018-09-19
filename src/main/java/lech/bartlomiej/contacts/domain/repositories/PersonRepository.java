@@ -2,9 +2,9 @@ package lech.bartlomiej.contacts.domain.repositories;
 
 import lech.bartlomiej.contacts.domain.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonRepository extends JpaRepository<Person, Long>, PersonRepositoryCustom {
 
@@ -12,7 +12,7 @@ public interface PersonRepository extends JpaRepository<Person, Long>, PersonRep
 
     Person getById(Long id);
 
-    List<Person> findByPesel(Long pesel);
+    Optional<Person> findByPesel(Long pesel);
 
     List<Person> findByFirstName(String firstName);
 

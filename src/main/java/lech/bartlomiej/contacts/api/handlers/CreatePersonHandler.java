@@ -21,11 +21,13 @@ public class CreatePersonHandler {
 
     @Transactional
     public void handle(CreatePersonCommand cmd){
-        List<Person> persons = personRepository.findByPesel(cmd.getPesel());
-        if (persons.isEmpty()) {
-            Person person = new Person(cmd.getFirstName(), cmd.getLastName(), cmd.getGender(), cmd.getBirthDate(), cmd.getPesel());
-            personRepository.save(person);
-        }
+        Optional<Person> optionalPerson = personRepository.findByPesel(cmd.getPesel());
+        if (!optionalPerson.isPresent())
+            personRepository.save(createNewPerson(cmd));
+    }
+
+    private Person createNewPerson(CreatePersonCommand cmd) {
+        return new Person(cmd.getFirstName(), cmd.getLastName(), cmd.getGender(), cmd.getBirthDate(), cmd.getPesel());
     }
 
 }

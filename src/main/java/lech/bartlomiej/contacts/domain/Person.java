@@ -1,5 +1,6 @@
 package lech.bartlomiej.contacts.domain;
 
+import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 

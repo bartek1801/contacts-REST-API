@@ -21,7 +21,7 @@ public class UpdatePersonDetailsHandler {
 
     @Transactional
     public void handle(UpdatePersonDetailsCommand command){
-        Optional<Person> person = personRepository.findByPesel(command.getPesel()).stream().findFirst();
+        Optional<Person> person = personRepository.findByPesel(command.getPesel());
         if (person.isPresent()){
             person.get().updateDetails(command);
             personRepository.save(person.get());
