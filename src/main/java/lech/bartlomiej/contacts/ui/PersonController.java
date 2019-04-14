@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -42,49 +43,48 @@ public class PersonController {
 
 
     @PostMapping
-    public void savePerson(@RequestBody CreatePersonCommand command){
-        createPersonHandler.handle(command);
+    public BasicPersonDto savePerson(@RequestBody CreatePersonCommand command) {
+        return createPersonHandler.handle(command);
     }
 
     @GetMapping("/{id}")
-    public BasicPersonDto getPerson(@PathVariable Long id){
+    public BasicPersonDto getPerson(@PathVariable UUID id) {
         return new BasicPersonDto(personFinder.getById(id));
     }
 
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable Long id){
+    public void deletePerson(@PathVariable UUID id) {
         DeletePersonCommand command = new DeletePersonCommand();
         command.setId(id);
         deletePersonHandler.handle(command);
     }
 
     @PutMapping("/{id}")
-    public void updatePersonDetails(@RequestBody UpdatePersonDetailsCommand command, @PathVariable Long id){
+    public void updatePersonDetails(@RequestBody UpdatePersonDetailsCommand command, @PathVariable UUID id) {
         updatePersonDetailsHandler.handle(command);
     }
 
     @GetMapping("/search")
-    public List<BasicPersonDto> findPersonsByNames(String firstName, String lastName){
+    public List<BasicPersonDto> findPersonsByNames(String firstName, String lastName) {
         List<Person> personList = personFinder.findByFirstNameOrLastName(firstName, lastName);
         return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("/search/contact")
-    public List<BasicPersonDto> findPersonsWithActiveContact(Boolean active){
+    public List<BasicPersonDto> findPersonsWithActiveContact(Boolean active) {
         List<Person> personList = personFinder.findByContactActive(active);
         return personList.stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
     @PostMapping("/")
-    public List<BasicPersonDto> findPerson(@RequestBody PersonSearchCriteria personSearchCriteria){
+    public List<BasicPersonDto> findPerson(@RequestBody PersonSearchCriteria personSearchCriteria) {
         return personRepository.search(personSearchCriteria).stream().map(BasicPersonDto::new).collect(Collectors.toList());
     }
 
     @GetMapping("search/all/{pageNo}")
-    public Page<BasicPersonDto> findAllPersons(@PathVariable Integer pageNo){
+    public Page<BasicPersonDto> findAllPersons(@PathVariable Integer pageNo) {
         return personRepository.findAll(new PageRequest(pageNo, 2, new Sort("lastName"))).map(BasicPersonDto::new);
     }
-
 
 
 }

@@ -1,19 +1,20 @@
 package lech.bartlomiej.contacts.domain;
 
+import lech.bartlomiej.contacts.api.dtos.BasicPersonDto;
 import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "persons")
 public class Person {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID id = UUID.randomUUID();
 
     private String firstName;
     private String lastName;
@@ -42,11 +43,11 @@ public class Person {
         this.active = true;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -118,5 +119,9 @@ public class Person {
 
     public void addDetailsToContact(UpdateContactForPersonCommand command) {
         this.contact.addDetails(command);
+    }
+
+    public BasicPersonDto toDto() {
+        return new BasicPersonDto(this);
     }
 }

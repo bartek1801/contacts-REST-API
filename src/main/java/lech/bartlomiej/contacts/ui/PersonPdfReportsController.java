@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/reports")
@@ -27,7 +28,7 @@ public class PersonPdfReportsController {
 
 
     @GetMapping("/test")
-    public void getTestPdfReport(@PathVariable Long id, HttpServletResponse response) throws IOException, DocumentException {
+    public void getTestPdfReport(@PathVariable UUID id, HttpServletResponse response) throws IOException, DocumentException {
         GenerateReportCommand command = new GenerateReportCommand();
         command.setPersonId(id);
         byte[] pdfData = generatePdfReportHandler.handle(command);

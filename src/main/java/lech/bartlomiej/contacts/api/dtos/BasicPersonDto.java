@@ -5,10 +5,11 @@ import lech.bartlomiej.contacts.domain.Gender;
 import lech.bartlomiej.contacts.domain.Person;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class BasicPersonDto {
 
-    private Long id;
+    private UUID id;
     private String firstName;
     private String lastName;
     private Gender gender;
@@ -24,6 +25,14 @@ public class BasicPersonDto {
         this.birthDate = person.getBirthDate();
         this.pesel = person.getPesel();
         this.active = person.isActive();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {

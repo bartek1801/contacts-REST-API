@@ -13,6 +13,8 @@ import lech.bartlomiej.contacts.domain.commands.DeleteContactForPersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
@@ -32,33 +34,33 @@ public class ContactController {
     }
 
     @PostMapping("/{personId}")
-    public void addContactToPerson(@PathVariable Long personId, @RequestBody AddContactCommand command){
+    public void addContactToPerson(@PathVariable UUID personId, @RequestBody AddContactCommand command){
         command.setPersonId(personId);
         addContactHandler.handle(command);
     }
 
     @GetMapping("/{personId}")
-    public ContactDto getContactsForPerson(@PathVariable Long personId){
+    public ContactDto getContactsForPerson(@PathVariable UUID personId){
         Person person = personFinder.getById(personId);
         return new ContactDto(person.getContact());
     }
 
 
     @PutMapping("/update/{personId}")
-    public void updateContactForPerson(@RequestBody UpdateContactForPersonCommand command, @PathVariable Long personId){
+    public void updateContactForPerson(@RequestBody UpdateContactForPersonCommand command, @PathVariable UUID personId){
         command.setPersonId(personId);
         updateContactForPersonHandler.handle(command);
     }
 
     @DeleteMapping("/delete/{personId}")
-    public void deleteContactForPerson(@PathVariable Long personId){
+    public void deleteContactForPerson(@PathVariable UUID personId){
         DeleteContactForPersonCommand command = new DeleteContactForPersonCommand();
         command.setPersonId(personId);
         deleteContactForPersonHandler.handle(command);
     }
 
     @PutMapping("delete/{personId}/details")
-    public void deleteContactDetails(@RequestBody DeleteContactDetailsCommand command, @PathVariable Long personId){
+    public void deleteContactDetails(@RequestBody DeleteContactDetailsCommand command, @PathVariable UUID personId){
         command.setPersonId(personId);
         deleteContactDetailsHandler.handle(command);
     }

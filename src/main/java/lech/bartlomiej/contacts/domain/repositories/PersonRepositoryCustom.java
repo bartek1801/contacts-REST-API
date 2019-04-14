@@ -5,7 +5,7 @@ import lech.bartlomiej.contacts.domain.Person;
 
 import java.util.List;
 
-public interface PersonRepositoryCustom {
+public interface PersonRepositoryCustom  {
 
     List<Person> search(PersonSearchCriteria personSearchCriteria);
 

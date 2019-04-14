@@ -3,11 +3,12 @@ package lech.bartlomiej.contacts.api.dtos;
 import lech.bartlomiej.contacts.domain.Contact;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ContactDto {
 
-    private Long personId;
+    private UUID personId;
     private Set<String> phoneNumbers;
     private Set<String> emailAddresses;
     private Set<AddressDto> addresses;
@@ -19,11 +20,11 @@ public class ContactDto {
         this.addresses = contact.getAddresses().stream().map(AddressDto::new).collect(Collectors.toSet());
     }
 
-    public Long getPersonId() {
+    public UUID getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setPersonId(UUID personId) {
         this.personId = personId;
     }
 

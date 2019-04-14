@@ -3,20 +3,21 @@ package lech.bartlomiej.contacts.domain.commands;
 import lech.bartlomiej.contacts.domain.Address;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class AddContactCommand implements ValidCommand {
 
     public static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-    private Long personId;
+    private UUID personId;
     private Set<String> phoneNumbers;
     private Set<String> emailAddresses;
     private Set<Address> addresses;
 
-    public Long getPersonId() {
+    public UUID getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setPersonId(UUID personId) {
         this.personId = personId;
     }
 

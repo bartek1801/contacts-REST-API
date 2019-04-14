@@ -5,12 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface PersonRepository extends JpaRepository<Person, Long>, PersonRepositoryCustom {
+public interface PersonRepository extends JpaRepository<Person, UUID>, PersonRepositoryCustom {
 
     //void save(Person person);
 
-    Person getById(Long id);
+    Person getById(UUID id);
 
     Optional<Person> findByPesel(Long pesel);
 

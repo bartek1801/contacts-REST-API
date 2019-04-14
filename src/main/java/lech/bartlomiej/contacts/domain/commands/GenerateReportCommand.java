@@ -1,14 +1,16 @@
 package lech.bartlomiej.contacts.domain.commands;
 
+import java.util.UUID;
+
 public class GenerateReportCommand {
 
-    private Long personId;
+    private UUID personId;
 
-    public Long getPersonId() {
+    public UUID getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setPersonId(UUID personId) {
         this.personId = personId;
     }
 }
