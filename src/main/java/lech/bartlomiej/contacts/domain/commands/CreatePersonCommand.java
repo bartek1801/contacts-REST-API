@@ -11,6 +11,10 @@ public class CreatePersonCommand implements ValidCommand {
     private LocalDate birthDate;
     private Long pesel;
 
+
+    public CreatePersonCommand() {
+    }
+
     public CreatePersonCommand(String firstName, String lastName, String gender, LocalDate birthDate, Long pesel) {
         this.firstName = firstName;
         this.lastName = lastName;

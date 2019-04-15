@@ -43,7 +43,7 @@ public class PersonController {
 
 
     @PostMapping
-    public BasicPersonDto savePerson(@RequestBody CreatePersonCommand command) {
+    public UUID savePerson(@RequestBody CreatePersonCommand command) {
         return createPersonHandler.handle(command);
     }
 

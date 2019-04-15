@@ -21,11 +21,6 @@ public class InMemoryPersonRepository implements PersonRepository {
         return REPO.get(person.getId());
     }
 
-//    @Override
-//    public <S extends Person> S save(S s) {
-//
-//
-//    }
 
     @Override
     public Person getById(UUID id) {
@@ -33,8 +28,8 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Optional<Person> findByPesel(Long pesel) {
-        return Optional.empty();
+    public Person findByPesel(Long pesel) {
+        return null;
     }
 
     @Override

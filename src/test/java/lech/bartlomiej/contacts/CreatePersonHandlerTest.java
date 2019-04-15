@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 public class CreatePersonHandlerTest {
@@ -23,10 +24,10 @@ public class CreatePersonHandlerTest {
         //given
         CreatePersonCommand cmd = new CreatePersonCommand("Jan", "Nowak", "M", LocalDate.of(1990, 2, 11), 12345678901L);
         //when
-        BasicPersonDto personDto = createPersonHandler.handle(cmd);
+        UUID id = createPersonHandler.handle(cmd);
         //then
-        Assertions.assertEquals(personDto.getFirstName(), "Jan");
-        Assertions.assertNotNull(personRepository.getById(personDto.getId()));
+        Assertions.assertNotNull(id);
+        Assertions.assertNotNull(personRepository.getById(id));
 
     }
 }

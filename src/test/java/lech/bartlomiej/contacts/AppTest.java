@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@Ignore
 public class AppTest {
 
     @Autowired
@@ -42,7 +41,7 @@ public class AppTest {
     }
 
 
-    @Test
+    //@Test
     public void shouldAddNewPerson() throws Exception {
         UUID personId = savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
 
@@ -85,7 +84,7 @@ public class AppTest {
         ;
     }
 
-    @Test
+//    @Test
     public void shouldDeletePerson() throws Exception {
         UUID personId = savePerson("Jan", "Nowak", Gender.M, LocalDate.parse("1990-01-01"), 90010122222L);
 
