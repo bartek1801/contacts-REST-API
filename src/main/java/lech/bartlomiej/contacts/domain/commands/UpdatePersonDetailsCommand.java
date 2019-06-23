@@ -12,6 +12,17 @@ public class UpdatePersonDetailsCommand implements ValidCommand {
     private LocalDate birthDate;
     private Long pesel;
 
+    public UpdatePersonDetailsCommand() {
+    }
+
+    public UpdatePersonDetailsCommand(String firstName, String lastName, Gender gender, LocalDate birthDate, Long pesel) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.pesel = pesel;
+    }
+
     public String getFirstName() {
         return firstName;
     }

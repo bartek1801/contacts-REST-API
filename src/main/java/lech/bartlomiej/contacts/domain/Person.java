@@ -1,7 +1,6 @@
 package lech.bartlomiej.contacts.domain;
 
 import lech.bartlomiej.contacts.api.dtos.BasicPersonDto;
-import lech.bartlomiej.contacts.domain.commands.CreatePersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdateContactForPersonCommand;
 import lech.bartlomiej.contacts.domain.commands.UpdatePersonDetailsCommand;
 
@@ -111,9 +110,10 @@ public class Person {
         this.contact = contact;
     }
 
-    public void updateDetails(UpdatePersonDetailsCommand command) {
+    public Person updateDetails(UpdatePersonDetailsCommand command) {
         if (!(firstName.equals(command.getFirstName())) && command.getFirstName() != null)
             this.firstName = command.getFirstName();
+        return this;
     }
 
 

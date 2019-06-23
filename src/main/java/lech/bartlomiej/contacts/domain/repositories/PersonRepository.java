@@ -13,7 +13,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID>, PersonRep
 
     Person getById(UUID id);
 
-    Person findByPesel(Long pesel);
+    Optional<Person> findByPesel(Long pesel);
 
     List<Person> findByFirstName(String firstName);
 

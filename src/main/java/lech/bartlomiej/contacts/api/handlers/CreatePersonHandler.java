@@ -20,11 +20,11 @@ public class CreatePersonHandler {
 
     @Transactional
     public UUID handle(CreatePersonCommand cmd) {
-        Person person = personRepository.findByPesel(cmd.getPesel());
-        if (person != null) {
-            return person.getId();
-        }
-        return personRepository.save(createNewPerson(cmd)).getId();
+        return personRepository
+                .findByPesel(cmd.getPesel())
+                .orElseGet(() -> personRepository.save(createNewPerson(cmd)))
+                .toDto()
+                .getId();
     }
 
     private Person createNewPerson(CreatePersonCommand cmd) {
