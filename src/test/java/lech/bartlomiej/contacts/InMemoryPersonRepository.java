@@ -3,12 +3,10 @@ package lech.bartlomiej.contacts;
 import lech.bartlomiej.contacts.api.PersonSearchCriteria;
 import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
-import lech.bartlomiej.contacts.domain.repositories.PersonRepositoryCustom;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.*;
 
@@ -16,7 +14,7 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     private static final Map<UUID, Person> REPO = new HashMap<>();
 
-    public Person save (Person person){
+    public Person save(Person person) {
         REPO.put(person.getId(), person);
         return REPO.get(person.getId());
     }
@@ -28,8 +26,8 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Person findByPesel(Long pesel) {
-        return null;
+    public Optional<Person> findByPesel(Long pesel) {
+        return Optional.empty();
     }
 
     @Override
@@ -63,7 +61,7 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public List<Person> findAll(Iterable<UUID> iterable) {
+    public List<Person> findAllById(Iterable<UUID> iterable) {
         return null;
     }
 
@@ -73,7 +71,7 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public void delete(UUID uuid) {
+    public void deleteById(UUID uuid) {
 
     }
 
@@ -83,7 +81,7 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public void delete(Iterable<? extends Person> iterable) {
+    public void deleteAll(Iterable<? extends Person> iterable) {
 
     }
 
@@ -92,20 +90,18 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     }
 
-
-
     @Override
-    public <S extends Person> List<S> save(Iterable<S> iterable) {
+    public <S extends Person> List<S> saveAll(Iterable<S> iterable) {
         return null;
     }
 
     @Override
-    public Person findOne(UUID uuid) {
-        return null;
+    public Optional<Person> findById(UUID uuid) {
+        return Optional.empty();
     }
 
     @Override
-    public boolean exists(UUID uuid) {
+    public boolean existsById(UUID uuid) {
         return false;
     }
 
@@ -135,8 +131,8 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public <S extends Person> S findOne(Example<S> example) {
-        return null;
+    public <S extends Person> Optional<S> findOne(Example<S> example) {
+        return Optional.empty();
     }
 
     @Override
