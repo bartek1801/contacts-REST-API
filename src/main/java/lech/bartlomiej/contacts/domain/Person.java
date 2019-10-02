@@ -116,6 +116,19 @@ public class Person {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                ", pesel=" + pesel +
+                ", active=" + active +
+                ", contact=" + contact +
+                '}';
+    }
 
     public void addDetailsToContact(UpdateContactForPersonCommand command) {
         this.contact.addDetails(command);

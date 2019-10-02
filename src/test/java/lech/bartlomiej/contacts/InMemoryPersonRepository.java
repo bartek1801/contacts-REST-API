@@ -3,20 +3,19 @@ package lech.bartlomiej.contacts;
 import lech.bartlomiej.contacts.api.PersonSearchCriteria;
 import lech.bartlomiej.contacts.domain.Person;
 import lech.bartlomiej.contacts.domain.repositories.PersonRepository;
-import lech.bartlomiej.contacts.domain.repositories.PersonRepositoryCustom;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class InMemoryPersonRepository implements PersonRepository {
 
     private static final Map<UUID, Person> REPO = new HashMap<>();
 
-    public Person save (Person person){
+    public Person save(Person person) {
         REPO.put(person.getId(), person);
         return REPO.get(person.getId());
     }
@@ -28,13 +27,16 @@ public class InMemoryPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Person findByPesel(Long pesel) {
-        return null;
+    public Optional<Person> findByPesel(Long pesel) {
+        return Optional.empty();
     }
 
     @Override
     public List<Person> findByFirstName(String firstName) {
-        return null;
+        return REPO.values()
+                .stream()
+                .filter(person -> person.getFirstName().equals(firstName))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -49,7 +51,7 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @Override
     public List<Person> findAll() {
-        return null;
+        return new ArrayList<>(REPO.values());
     }
 
     @Override
@@ -69,17 +71,17 @@ public class InMemoryPersonRepository implements PersonRepository {
 
     @Override
     public long count() {
-        return 0;
+        return REPO.size();
     }
 
     @Override
     public void delete(UUID uuid) {
-
+        REPO.remove(uuid);
     }
 
     @Override
     public void delete(Person person) {
-
+        REPO.remove(person.getId(), person);
     }
 
     @Override
@@ -91,7 +93,6 @@ public class InMemoryPersonRepository implements PersonRepository {
     public void deleteAll() {
 
     }
-
 
 
     @Override
